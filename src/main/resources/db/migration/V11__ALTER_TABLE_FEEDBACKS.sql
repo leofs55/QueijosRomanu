@@ -1,0 +1,2 @@
+ALTER TABLE feedbacks
+ADD COLUMN cart_id VARCHAR(50);

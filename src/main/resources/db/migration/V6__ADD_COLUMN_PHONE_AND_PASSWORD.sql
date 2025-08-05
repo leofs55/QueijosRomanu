@@ -1,0 +1,3 @@
+ALTER TABLE users
+ADD COLUMN phone_number VARCHAR(255),
+ADD COLUMN password VARCHAR(255);

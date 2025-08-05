@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: CommerceMail
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: CommerceMail
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/CommerceMail
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enable: false
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+  cache:
+    redis:
+      time-to-live: 10000
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: leonardofigorellis@gmail.com
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            protocols: TLSv1.2
+
+security:
+  secret:
+    value: ${SECRET_VALUE}

@@ -1,0 +1,2 @@
+ALTER TABLE product DROP COLUMN imgurl;
+ALTER TABLE product ADD COLUMN imgUrl VARCHAR(256);

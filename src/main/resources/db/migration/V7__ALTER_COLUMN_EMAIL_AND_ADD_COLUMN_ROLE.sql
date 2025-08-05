@@ -1,0 +1,8 @@
+ALTER TABLE users
+DROP COLUMN email;
+
+CREATE TYPE users_roles AS ENUM ('ADMIN','USER');
+
+ALTER TABLE users
+ADD COLUMN email VARCHAR(256) UNIQUE,
+ADD COLUMN role users_roles;
