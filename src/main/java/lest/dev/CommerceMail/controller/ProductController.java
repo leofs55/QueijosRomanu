@@ -81,4 +81,12 @@ public class ProductController {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<ProductResponse>> findProductsByCategoryEndPoint(@PathVariable Long categoryId) {
+        List<ProductResponse> productResponseList = productService.findProductsByCategory(categoryId).stream()
+                .map(ProductMapper::map)
+                .toList();
+        return ResponseEntity.ok(productResponseList);
+    }
 }

@@ -29,12 +29,12 @@ public class FeedbackService implements FeedbackUsecases {
             if (feedback == null) {
                 throw new IllegalArgumentException("Feedbak cannot be null.");
             }
-            User user = userService.findUserById(feedback.getUser().getId());
+            User user = userService.findUserById(feedback.getUserId());
             Cart cart = cartService.findCart(feedback.getCartId());
             if (user == null || cart == null) {
                 throw new RuntimeException("UserId or CartId not exist!");
             }
-            feedback.setUser(user);
+            feedback.setUserId(user.getId());
             return repository.save(feedback);
         } catch (Exception e) {
             throw new RuntimeException(e.getLocalizedMessage(), e);
@@ -70,8 +70,8 @@ public class FeedbackService implements FeedbackUsecases {
 
             feedback.setId(feedbackDb.getId());
             feedback.setCartId(feedback.getCartId());
-            User user = userService.findUserById(feedback.getUser().getId());
-            feedback.setUser(user);
+            User user = userService.findUserById(feedback.getUserId());
+            feedback.setUserId(user.getId());
 
             return repository.save(feedback);
         } catch (Exception e) {

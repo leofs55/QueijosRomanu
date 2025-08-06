@@ -46,17 +46,17 @@ public class CartService {
             User userInDb = userService.findUserById(cart.getUser().getId());
             // List<Products> listProductsWithIdAndQuantity -> List<Products> listProductsForClient
             List<Map<String, Product>> productsInDb = productService.findProductInDb(cart.getProducts());
-
+        
             log.info(productsInDb.toString());
             cart.setProducts(productService.reduceProductsInDb(productsInDb));
             cart.setUser(userInDb);
             cart.calculateTotalPrice();
-
+            log.info(cart.toString());
             return repository.save(cart);
         } catch (UserNotFoundException | ProductNotFoundException e) {
             throw new CartCreationException("Failed to create cart due to missing user or product data: " + e.getMessage(), e);
         } catch (Exception e) {
-            throw new CartCreationException("Failed to create cart: " + e.getMessage(), e);
+            throw new CartCreationException("Failed to create cart: " + e.getLocalizedMessage(), e);
         }
     }
 

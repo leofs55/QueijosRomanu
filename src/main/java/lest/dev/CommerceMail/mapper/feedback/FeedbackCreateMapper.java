@@ -14,7 +14,7 @@ public class FeedbackCreateMapper {
                 .description(feedbackCreateRequest.description())
                 .rating(feedbackCreateRequest.rating())
                 .cartId(feedbackCreateRequest.cartId())
-                .user(User.builder().id(feedbackCreateRequest.userId()).build())
+                .userId(feedbackCreateRequest.userId())
                 .build();
     }
 

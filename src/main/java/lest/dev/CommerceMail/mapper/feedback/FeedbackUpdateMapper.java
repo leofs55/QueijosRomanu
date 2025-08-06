@@ -14,7 +14,7 @@ public class FeedbackUpdateMapper {
                 .description(feedbackUpdateRequest.description())
                 .rating(feedbackUpdateRequest.rating())
                 .cartId(feedbackUpdateRequest.cartId())
-                .user(User.builder().id(feedbackUpdateRequest.userId()).build())
+                .userId(feedbackUpdateRequest.userId())
                 .build();
     }
 

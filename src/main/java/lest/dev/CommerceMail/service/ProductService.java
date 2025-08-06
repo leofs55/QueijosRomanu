@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import lest.dev.CommerceMail.exception.category.CategoryNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,7 @@ public class ProductService {
                 productInDb.setQuantity(Integer.valueOf(
                         productInDb.getQuantity()- product.getQuantity()
                 ));
+                product.setCategory(productInDb.getCategory());
                 productsForCart.add(ProductMapper.map(productInDb, product.getQuantity()));
                 newProductsForDb.add(productInDb);
             }
@@ -135,5 +137,18 @@ public class ProductService {
         }
     }
 
+    public List<Product> findProductsByCategory(Long categoryId) {
+        if (categoryId == null) {
+            throw new IllegalArgumentException("Category ID cannot be null.");
+        }
+        try {
+            if(categoryService.findById(categoryId) == null) {
+                throw new CategoryNotFoundException("Category not found with ID: " + categoryId);
+            }
+            return repository.findProductsByCategoryId(categoryId);
+        } catch (Exception e) {
+            throw new ProductNotFoundException("Products not found with Category ID: " + categoryId);
+        }
+    }
 
 }

@@ -36,7 +36,7 @@ public class FeedbackController {
     @GetMapping("/all")
     public ResponseEntity<List<FeedbackResponse>> findAllFeedbacksEndPoint() {
         List<FeedbackResponse> feedbackResponses =  feedbackService.findAllFeedbacks().stream()
-                .map(FeedbackMapper::map)
+                .map(feedback -> FeedbackMapper.map(feedback, userService.findUserById(feedback.getUserId())))
                 .toList();
         return ResponseEntity.ok(feedbackResponses);
     }
@@ -76,7 +76,7 @@ public class FeedbackController {
     public ResponseEntity<FeedbackResponse> findFeedBack(@PathVariable String cartId){
 
         Feedback feedback = feedbackService.findFeedbackByCartId(cartId);
-        FeedbackResponse feedbackResponse = FeedbackMapper.map(feedback);
+        FeedbackResponse feedbackResponse = FeedbackMapper.map(feedback, userService.findUserById(feedback.getUserId()));
 
         return ResponseEntity.status(HttpStatus.OK).body(feedbackResponse);
     }

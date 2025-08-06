@@ -44,9 +44,6 @@ public class User implements UserDetails {
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     private UsersRoles userRole;
 
-    @OneToMany(mappedBy = "user")
-    private List<Feedback> feedbacks;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

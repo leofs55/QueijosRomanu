@@ -60,6 +60,7 @@ public class UserController {
 
             return ResponseEntity.ok(UserLoginResponse.builder()
                             .id(user.getId())
+                            .role(user.getUserRole())
                             .token(tokenService.generateToken(user))
                             .build());
         } catch (BadCredentialsException ex) {

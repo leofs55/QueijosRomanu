@@ -6,13 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "feedbacks")
+@Table(name = "feedbacks")  
 public class Feedback {
 
     @Id
@@ -28,9 +27,6 @@ public class Feedback {
     @Column(name = "cart_id")
     private String cartId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-
+    @Column(name = "user_id")
+    private Long userId;
 }
