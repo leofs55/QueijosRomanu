@@ -2,8 +2,7 @@ package lest.dev.CommerceMail.mapper.feedback;
 
 import lest.dev.CommerceMail.dto.request.feedback.FeedbackUpdateRequest;
 import lest.dev.CommerceMail.dto.response.feedback.FeedbackUpdateResponse;
-import lest.dev.CommerceMail.entity.Feedback;
-import lest.dev.CommerceMail.entity.User;
+import lest.dev.CommerceMail.entity.Feedback;       
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

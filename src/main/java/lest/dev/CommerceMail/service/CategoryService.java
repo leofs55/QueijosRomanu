@@ -72,7 +72,9 @@ public class CategoryService {
             if (!categoryRepository.existsById(id)) {
                 throw new RuntimeException("Categoria com ID " + id + " não encontrada");
             }
-            
+            if (categoryRepository.existsProductInCategory(id)) {
+                throw new RuntimeException("Categoria não pode ser deletada pois possui produtos associados");
+            }
             categoryRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao deletar categoria: " + e.getMessage());

@@ -97,4 +97,17 @@ public class CartController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CartResponse>> findAllCartsEndPoint(@AuthenticationPrincipal JWTUser jwtUser) {
+
+        userService.validateUserAccess(jwtUser.id(), jwtUser);
+
+        userService.validatePermissionUser(jwtUser);
+
+        List<CartResponse> cartList = cartService.findAllCarts().stream()
+                .map(CartMapper::map)
+                .toList();
+        return ResponseEntity.ok(cartList);
+    }
 }

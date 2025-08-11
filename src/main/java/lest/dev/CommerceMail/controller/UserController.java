@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -105,5 +106,14 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.ok("Erro ao salvar a senha!");
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserResponse>> findAllUsersEndPoint(@AuthenticationPrincipal JWTUser jwtUser) {
+        userService.validatePermissionUser(jwtUser);
+        List<UserResponse> userList = userService.findAllUsers().stream()
+                .map(UserMapper::map)
+                .toList();
+        return ResponseEntity.ok(userList);
     }
 }

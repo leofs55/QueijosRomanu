@@ -138,4 +138,8 @@ public class CartService {
             throw new UserAccessDennied(e.getLocalizedMessage(), e);
         }
     }
+
+    public List<Cart> findAllCarts() {
+        return repository.findAll();
+    }
 }

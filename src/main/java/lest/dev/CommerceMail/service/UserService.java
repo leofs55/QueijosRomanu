@@ -1,5 +1,7 @@
 package lest.dev.CommerceMail.service;
 
+import java.util.List;
+
 import lest.dev.CommerceMail.dto.response.user.JWTUser;
 import lest.dev.CommerceMail.entity.User;
 import lest.dev.CommerceMail.enums.UsersRoles;
@@ -128,5 +130,7 @@ public class UserService {
     }
 
 
-
+    public List<User> findAllUsers() {
+        return repository.findAll();
+    }
 }
