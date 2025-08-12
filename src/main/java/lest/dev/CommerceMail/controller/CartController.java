@@ -110,4 +110,16 @@ public class CartController {
                 .toList();
         return ResponseEntity.ok(cartList);
     }
+
+    @GetMapping("/sold/{id}")
+    public ResponseEntity<CartResponse> soldCartEndPoint(@PathVariable String id,
+                                                         @AuthenticationPrincipal JWTUser jwtUser) {
+
+        userService.validatePermissionUser(jwtUser);
+
+        CartResponse cartResponse = CartMapper.map(cartService.soldCart(id));
+
+        return ResponseEntity.ok(cartResponse);
+    }
+    
 }

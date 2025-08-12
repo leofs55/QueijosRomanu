@@ -1,5 +1,6 @@
 package lest.dev.CommerceMail.exception;
 
+import lest.dev.CommerceMail.exception.cart.CartAlreadySoldException;
 import lest.dev.CommerceMail.exception.cart.CartCreationException;
 import lest.dev.CommerceMail.exception.cart.CartNotFoundException;
 import lest.dev.CommerceMail.exception.cart.CartUpdateException;
@@ -28,6 +29,11 @@ public class CartExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CartAlreadySoldException.class)
+    public ResponseEntity<String> handleCartAlreadySoldException(CartAlreadySoldException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

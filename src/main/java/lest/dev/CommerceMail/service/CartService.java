@@ -11,6 +11,7 @@ import lest.dev.CommerceMail.exception.User.UserNotFoundException;
 import lest.dev.CommerceMail.exception.cart.CartCreationException;
 import lest.dev.CommerceMail.exception.cart.CartNotFoundException;
 import lest.dev.CommerceMail.exception.cart.CartUpdateException;
+import lest.dev.CommerceMail.exception.cart.CartAlreadySoldException;
 import lest.dev.CommerceMail.exception.product.ProductNotFoundException;
 import lest.dev.CommerceMail.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
@@ -141,5 +142,21 @@ public class CartService {
 
     public List<Cart> findAllCarts() {
         return repository.findAll();
+    }
+
+    public Cart soldCart(String id) {
+        try {
+            if (id == null || id.trim().isEmpty()) {
+                throw new IllegalArgumentException("Cart ID cannot be null or empty for sold cart.");
+            }
+            Cart cart = findCart(id);
+            if (cart.getStatus() == Status.SOLD) {
+                throw new CartAlreadySoldException("Cart already sold!");
+            }
+            cart.setStatus(Status.SOLD);
+            return repository.save(cart);
+        } catch (CartNotFoundException e) {
+            throw new CartNotFoundException(e.getLocalizedMessage(), e);
+        }
     }
 }
