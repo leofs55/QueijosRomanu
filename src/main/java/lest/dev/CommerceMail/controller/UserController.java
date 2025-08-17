@@ -20,6 +20,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -62,6 +64,8 @@ public class UserController {
             return ResponseEntity.ok(UserLoginResponse.builder()
                             .id(user.getId())
                             .role(user.getUserRole())
+                            .logoutExpirationTime(LocalDateTime.now().plusSeconds(86400))
+                            .loggedAtTime(LocalDateTime.now())
                             .token(tokenService.generateToken(user))
                             .build());
         } catch (BadCredentialsException ex) {

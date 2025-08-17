@@ -42,6 +42,10 @@ spring:
           ssl:
             protocols: TLSv1.2
 
+
+file:
+  upload-dir: src\main\resources\static\uploads
+
 security:
   secret:
     value: ${SECRET_VALUE}

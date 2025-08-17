@@ -39,4 +39,9 @@ public class ProductExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(StorageException.class)
+    public ResponseEntity<String> handleStorageException(StorageException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 }

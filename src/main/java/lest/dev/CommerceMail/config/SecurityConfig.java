@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/v1/user/reset-password/{userId}").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/feedback/all").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/v1/category/all").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/image/product/{filename}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
