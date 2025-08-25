@@ -64,7 +64,7 @@ public class UserController {
             return ResponseEntity.ok(UserLoginResponse.builder()
                             .id(user.getId())
                             .role(user.getUserRole())
-                            .logoutExpirationTime(LocalDateTime.now().plusSeconds(86400))
+                            .logoutExpirationTime(LocalDateTime.now().plusSeconds(18000))
                             .loggedAtTime(LocalDateTime.now())
                             .token(tokenService.generateToken(user))
                             .build());

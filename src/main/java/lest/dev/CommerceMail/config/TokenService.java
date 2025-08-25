@@ -25,7 +25,7 @@ public class TokenService {
         return JWT.create()
                 .withSubject(user.getEmail())
                 .withClaim("userId", user.getId())
-                .withExpiresAt(Instant.now().plusSeconds(86400))
+                .withExpiresAt(Instant.now().plusSeconds(18000))
                 .withIssuedAt(Instant.now())
                 .withIssuer("API CommerceMail")
                 .sign(algorithm);

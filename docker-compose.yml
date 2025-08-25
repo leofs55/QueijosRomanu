@@ -9,6 +9,8 @@ services:
     depends_on:
       - postgres
       - mongo
+    env_file:
+      - .env
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/CommerceMail
       SPRING_DATASOURCE_USERNAME: postgres
