@@ -9,13 +9,14 @@ services:
     depends_on:
       - postgres
       - mongo
-    env_file:
-      - .env
+      - redis
+    env_file: .env
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/CommerceMail
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/CommerceMail
+      SPRING_DATASOURCE_URL: ${POSTGRES_URL}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_DATA_MONGODB_URI: ${MONGODB_URI}
+      SPRING_DATA_REDIS_HOST: redis
     networks:
       - backend
 
@@ -24,8 +25,8 @@ services:
     image: postgres:latest
     environment:
       POSTGRES_DB: CommerceMail
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '5432:5432'
     networks:
@@ -46,11 +47,13 @@ services:
   redis:
     container_name: CommerceMail-redis
     image: redis
-    restart: no
+    restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '6379:6379'
+    networks:
+      - backend
 
 volumes:
   postgres-data:
