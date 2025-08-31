@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Builder
-public record CartResponse(String id,
+public record CartResponse(Long id,
                            List<ProductResponse> productResponses,
                            BigDecimal totalPrice,
                            UserResponse user,

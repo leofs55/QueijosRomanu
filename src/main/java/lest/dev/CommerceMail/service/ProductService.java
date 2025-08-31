@@ -34,7 +34,6 @@ public class ProductService {
         }
     }
 
-    @Cacheable(value = "products", key = "#productId")
     public Product findProduct(Long productId) {
         if (productId == null) {
             throw new IllegalArgumentException("Product ID cannot be null.");
@@ -43,7 +42,6 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with ID: " + productId));
     }
 
-    @Cacheable(value = "products")
     public List<Product> findAllProduct() {
         List<Product> productList = repository.findAll();
         return productList;
